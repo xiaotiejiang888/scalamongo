@@ -1,4 +1,7 @@
-import java.io.{File, PrintWriter}
+import java.io._
+
+import com.mongo.spark.HDFSFileService
+
 import scala.collection.mutable.ArrayBuffer
 
 object FindTd {
@@ -15,6 +18,22 @@ object FindTd {
     writer.write(tds2)
     writer.close()
     conn.close
+    HDFSFileService.saveFile("td.txt")
+
+
+    val outputStream = new FileOutputStream(new File("tdfromHadoop.txt"))
+    val in = HDFSFileService.getFile("td.txt")
+    var b = new Array[Byte](1024)
+    var numBytes = in.read(b)
+    while (numBytes > 0) {
+      outputStream.write(b, 0, numBytes)
+      numBytes = in.read(b)
+    }
+    outputStream.close()
+    in.close()
+    val localCheckReader = new BufferedReader(new FileReader("tdfromHadoop.txt"))
+    print(localCheckReader.readLine)
+    localCheckReader.close()
   }
 }
 
