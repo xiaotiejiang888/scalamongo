@@ -11,9 +11,28 @@
     <dependencies>
         <dependency>
             <groupId>org.mongodb</groupId>
-            <artifactId>casbah_2.11</artifactId>
+            <artifactId>casbah-commons_2.11</artifactId>
             <version>3.1.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>casbah-core_2.11</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>casbah-gridfs_2.11</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>casbah-query_2.11</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -23,6 +42,16 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>2.7.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>2.1.1</version>
         </dependency>
     </dependencies>
     <build>

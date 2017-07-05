@@ -4,6 +4,7 @@ import java.io.{BufferedInputStream, File, FileInputStream, InputStream}
 
 import org.apache.hadoop.conf._
 import org.apache.hadoop.fs._
+import org.apache.spark.sql.SparkSession
 
 object HDFSFileService {
   private val conf = new Configuration()
@@ -44,5 +45,14 @@ object HDFSFileService {
     if (!fileSystem.exists(path)) {
       fileSystem.mkdirs(path)
     }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession
+      .builder()
+      .appName("MongoSparkConnectorTour").master("spark://172.23.5.113:7077")
+      .getOrCreate()
+    val df = spark.sqlContext.read.json("hdfs://wifianalytics/user/zmy/td_2017-07-04.txt");
+    df.show();
   }
 }
