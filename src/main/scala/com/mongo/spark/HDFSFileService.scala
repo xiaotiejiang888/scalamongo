@@ -30,6 +30,19 @@ object HDFSFileService {
     out.close()
   }
 
+  def saveFileFromInputStream(inputStream: InputStream, fileName:String): Unit = {
+    val out = fileSystem.create(new Path(fileName))
+    val in = new BufferedInputStream(inputStream)
+    var b = new Array[Byte](1024)
+    var numBytes = in.read(b)
+    while (numBytes > 0) {
+      out.write(b, 0, numBytes)
+      numBytes = in.read(b)
+    }
+    in.close()
+    out.close()
+  }
+
   def removeFile(filename: String): Boolean = {
     val path = new Path(filename)
     fileSystem.delete(path, true)
@@ -52,7 +65,7 @@ object HDFSFileService {
       .builder()
       .appName("MongoSparkConnectorTour").master("spark://172.23.5.113:7077")
       .getOrCreate()
-    val df = spark.sqlContext.read.json("hdfs://wifianalytics/user/zmy/td_2017-07-04.txt");
+    val df = spark.sqlContext.read.json("hdfs://wifianalytics/user/zmy/td_2017-07-06.txt");
     df.show();
   }
 }

@@ -19,16 +19,11 @@ object FindTd {
     for (table <- tables){
       var tds = conn("mpush")(table).find
       val fileName = table + "_" + dt + ".txt"
-      val file = new File(fileName)
-      val writer = new PrintWriter(file)
       var tdsStr = "";
       for (elem <- tds) {
         tdsStr += (elem.toString+"\n")
       }
-      writer.write(tdsStr)
-      writer.close()
-      HDFSFileService.saveFile(fileName)
-      file.delete()
+      HDFSFileService.saveFileFromInputStream(new ByteArrayInputStream(tdsStr.getBytes()),fileName)
     }
     conn.close
   }
