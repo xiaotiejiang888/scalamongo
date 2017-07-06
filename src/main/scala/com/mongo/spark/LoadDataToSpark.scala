@@ -5,7 +5,7 @@ import java.util.Date
 import com.mongo.spark.HDFSFileService
 
 
-object FindTd {
+object LoadDataToSpark {
   def main(args: Array[String]): Unit = {
     var tables = Array("td","app","push","activity")
     def getDt = {
